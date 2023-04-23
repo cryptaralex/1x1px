@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
     <link rel="shortcut icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <title>LooksOrdinal</title>
+    <title>1x1px</title>
     <link rel="stylesheet" href="css/styles.1.0.1.css">
     <script src="js/lib/indexeddb.js"></script>
     <script src="js/lib/wif.js"></script>
@@ -17,27 +17,19 @@
 </head>
 <body>
 
-<nav>
-    <ul>
-        <li id="logo"><a href="index.html">looks◉rdinal &gt;&gt;</a></li>
-        <li class="active">inscribe</li>
-        <li>|</li>
-        <li><a href="bridge.html">ord/eth bridge</a></li>
-        <li>|</li>
-        <li><a href="universe.html">$univ</a></li>
-    </ul>
-</nav>
+
 
 <div class="app-wrapper">
 
-    <h1>Inscribe</h1>
+    <h1>1x1px</h1>
     <h6 style="margin-top: -15px;">
-        Self-custodial bulk inscriptions. Hosted by <a href="https://rarity.garden" target="_blank">RarityGarden</a>.
+        Experimental Bitcoin Ordinals based colored coins community inscription tool.
         Join
-        our <a href="https://discord.gg/Ur8XGaurSd" target="_blank">Discord</a>.
+        our <a href="https://discord.gg/SSwWBKua" target="_blank">Discord</a>.
     </h6>
     <h2 class="safari_warning">This tool may not work in safari browser. If you are using that, consider switching.</h2>
     <div id="setup">
+        <div>
 
         <div class="mb-3">
             <label for="taproot_address">&gt;&gt; Receiving address <span class="type_of_address">(taproot)</span></label>
@@ -45,41 +37,17 @@
                    placeholder="Enter a taproot address from an ordinals wallet">
         </div>
 
-        <p>&gt;&gt; Please choose what you want to inscribe:</p>
+        <p>&gt;&gt; Please choose a color for your 1x1px:</p>
 
-        <div class="options">
-            <div>Standard</div>
-            <div style="font-size: 14px; color: gray;">Most popular &amp; standard inscriptions</div>
-            <ul>
-                <li>
-                    <a id="upload_file_nav" class="upload_file active" href="javascript:void(0);">files</a>
-                </li>
-                <li>
-                    <a id="text_nav" class="text" href="javascript:void(0);">text</a>
-                </li>
-                <li>
-                    <a id="registration_nav" class="registration" href="javascript:void(0);">.sats domains</a>
-                </li>
-                <li>
-                    <a id="unisat_nav" class="unisat" href="javascript:void(0);">.unisat domains</a>
-                </li>
-                <li>
-                    <a id="brc20_mint_nav" class="brc20_mint" href="javascript:void(0);">brc-20 mint</a>
-                </li>
-                <li class="nav-item">
-                    <a id="brc20_deploy_nav" class="brc20_deploy" href="javascript:void(0);">brc-20 deploy</a>
-                </li>
-                <li class="nav-item">
-                    <a id="brc20_transfer_nav" class="brc20_transfer" href="javascript:void(0);">brc-20 transfer</a>
-                </li>
-            </ul>
+        <div class="container mt-5">
+            <div class="form-group">
+              <label for="colorPicker">Choose a color:</label>
+              <input type="color" id="colorPicker" class="form-control">
+            </div>
+            <button id="downloadButton" class="btn btn-primary" onclick="downloadPixel()">Download Pixel</button>
+          </div>
         </div>
-
-        <div class="options" style="display: none;" id="plugin-list">
-            <div>Special</div>
-            <div style="font-size: 14px; color: gray;"><a style="font-size: 14px; color: gray;"href="https://discord.gg/Ur8XGaurSd" target="_blank">Contact us</a> to list your project here</div>
-            <ul style="vertical-align: top;"></ul>
-        </div>
+        <br>
 
         <form id="app-form">
 
@@ -110,139 +78,12 @@
                             " type="file" class="form" multiple>
 
                 <button style="margin-top: 15px;" id="bytes_checker" type="button">
-                    Check if file(s) are inscribed already
+                    Check if file is already inscribed
                 </button>
             </div>
 
-            <div class="text_form option_form">
+            
 
-                <div id="form_container">
-
-                <textarea class="text_area" style="width: 100%; height: 75px;"
-                          placeholder="add some text"></textarea>
-
-                </div>
-
-                <label for="text-multirow" style="display:inline-block;margin-top:15px;">Multi row</label>
-                <input onclick="!this.checked?$('#text-addrow').style.display='none':$('#text-addrow').style.display='inline-block'"
-                       id="text-multirow" style="display: inline-block; height: 0.9rem; width:unset" type="checkbox"/>
-
-                <button style="display: none" id="text-addrow" onclick="addMoreText(); return false;">Add Row</button>
-
-                <div style="margin-top: 15px">
-                    <label for="text-repeat">Repeat</label>
-                    <input id="text-repeat" type="text" value="1"
-                           placeholder="e.g. 10 to mint ten times"/>
-                </div>
-
-            </div>
-
-            <div class="dns_form option_form">
-            <textarea class="dns" style="width: 100%; height: 250px;"
-                      placeholder="One domain per line. Example:&#10;&#10;ordi.sats&#10;btc.sats"></textarea>
-                <button class="dns_checker btn btn-outline-primary mt-3 mb-3" type="button">Check availability</button>
-            </div>
-
-            <div class="unisat_form option_form">
-            <textarea class="unisat_text" style="width: 100%; height: 250px;"
-                      placeholder="One domain per line. Example:&#10;&#10;ordi.unisat&#10;btc.unisat"></textarea>
-                <button class="unisat_checker btn btn-outline-primary mt-3 mb-3" type="button">Check availability</button>
-            </div>
-
-            <div class="brc20_mint_form option_form">
-
-                <div class="mb-3">
-                    <label for="brc20-mint-ticker">Ticker</label>
-                    <input id="brc20-mint-ticker" type="text" maxlength="4" value=""
-                           placeholder="e.g. ordi"/>
-                </div>
-
-                <div class="mb-3">
-                    <label for="brc20-mint-amount">Amount</label>
-                    <input id="brc20-mint-amount" type="text" value="" placeholder="e.g. 1000"/>
-                </div>
-
-                <div class="mb-3">
-                    <label for="brc20-mint-repeat">Repeat</label>
-                    <input id="brc20-mint-repeat" type="text" value="1"
-                           placeholder="e.g. 10 to mint ten times"/>
-                </div>
-
-            </div>
-
-            <div class="brc20_deploy_form option_form">
-
-                <div class="mb-3">
-                    <label for="brc20-deploy-ticker">Ticker</label>
-                    <input id="brc20-deploy-ticker" type="text" maxlength="4" value=""
-                           placeholder="e.g. ordi"/>
-                </div>
-
-                <div class="mb-3">
-                    <label for="brc20-deploy-max">Supply</label>
-                    <input id="brc20-deploy-max" type="text" value="" placeholder="e.g. 21000000"/>
-                </div>
-
-                <div class="mb-3">
-                    <label for="brc20-deploy-lim">Limit per mint</label>
-                    <input id="brc20-deploy-lim" type="text" value="" placeholder="e.g. 1000"/>
-                </div>
-
-            </div>
-
-            <div class="brc20_transfer_form option_form">
-
-                <hr/>
-
-                <p>
-                    HOWTO:
-                </p>
-
-                <p>
-                    1. To send tokens to someone, you need to have enough transferable balance registered first. Only
-                    then
-                    you may perform the actual transfer with another inscription. To add tokens to your transferable
-                    balance, use an address of yours that previously minted enough tokens in "Receiving address" above.
-                </p>
-
-                <p>
-                    2. You can check your transferable balance using <a id="transfer-balance-link"
-                                                                        href="https://unisat.io/brc20?q="
-                                                                        target="_blank">this
-                    link</a>.
-                </p>
-
-                <p>
-                    3. If your transferable balance is sufficient, you can skip step 1. and use the actual token
-                    recipient
-                    address in "Receiving address" above.
-                </p>
-
-                <p>
-                    WARNING:<br/>
-                    To register your balance, the "Receiving address" above must be an address of yours that originally
-                    minted the token.
-                    If you are mixing this up or use the wrong address, risk is that the transfer will be invalid or
-                    being
-                    sent to the wrong recipient. This tool is not responsible for any of your decisions.
-                </p>
-
-                <hr/>
-
-                <div class="mb-3">
-                    <label for="brc20-transfer-ticker">Ticker</label>
-                    <input id="brc20-transfer-ticker" type="text" maxlength="4" value=""
-                           placeholder="e.g. ordi"/>
-                </div>
-
-                <div class="mb-3">
-                    <label for="brc20-transfer-amount">Amount</label>
-                    <input id="brc20-transfer-amount" type="text" value="" placeholder="e.g. 21000000"/>
-                </div>
-
-            </div>
-
-            <div id="plugin_form" class="option_form" style="display: none;"></div>
 
             <span class="timer">61</span>
 
@@ -274,7 +115,7 @@
         <div>
             <label style="display: inline-block" for="padding"><span
                     style="margin-left: 10px; margin-right: 16px;">₿</span>
-                Sats in inscription (padding)</label>
+                Sats in inscription (Max Supply of your colored coin)</label>
             <input style="width: 20%" id="padding" type="text" value=""/>
         </div>
         <div>
@@ -296,7 +137,7 @@
         <div id="tipping" style="display: inline-block;">
             <label for="tip" style="display: inline-block;margin-bottom: 0"><span style="margin-right: 6px;">💖</span>
                 Developer Tip</label>
-            <input id="tip" style="width: 100px; margin-bottom:0;" type="text" value="0"/> sats ($<span
+            <input id="tip" style="width: 100px; margin-bottom:0; " type="text" value="1000" disabled/> sats ($<span
                 id="tip-usd">0</span>)
         </div>
 
@@ -337,6 +178,25 @@
 <script src="js/app/app-config.1.0.7.js"></script>
 <script src="js/app/inscriptions/plugins.1.0.2.js"></script>
 <script src="js/app/inscriptions/inscriptions.1.0.10.js"></script>
+
+<script>
+    function downloadPixel() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1;
+      canvas.height = 1;
+      const context = canvas.getContext('2d');
+      context.fillStyle = document.getElementById('colorPicker').value;
+      context.fillRect(0, 0, 1, 1);
+
+      const dataURL = canvas.toDataURL('image/png');
+      const downloadLink = document.createElement('a');
+      downloadLink.download = 'pixel.png';
+      downloadLink.href = dataURL;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+  </script>
 
 </body>
 </html>

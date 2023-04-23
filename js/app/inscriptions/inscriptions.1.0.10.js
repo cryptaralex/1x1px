@@ -31,14 +31,14 @@ slider.oninput = function () {
 window.onload = async function () {
 
     $('#padding').value = padding;
-    $('.text').onclick = showText;
-    $('.upload_file').onclick = showUploader;
-    $('.registration').onclick = showRegister;
-    $('.unisat').onclick = showUnisat;
-    $('.brc20_mint').onclick = showBrc20Mint;
-    $('.brc20_deploy').onclick = showBrc20Deploy;
-    $('.brc20_transfer').onclick = showBrc20Transfer;
-    $('#backup-usage').onclick = showBackupUsage;
+  //  $('.text').onclick = showText;
+   // $('.upload_file').onclick = showUploader;
+   // $('.registration').onclick = showRegister;
+   // $('.unisat').onclick = showUnisat;
+   // $('.brc20_mint').onclick = showBrc20Mint;
+   // $('.brc20_deploy').onclick = showBrc20Deploy;
+   // $('.brc20_transfer').onclick = showBrc20Transfer;
+   // $('#backup-usage').onclick = showBackupUsage;
     $('#tip').onfocus = async function(){
 
         this.value = '';
@@ -69,7 +69,7 @@ window.onload = async function () {
 
     }, 5000);
 
-    loadPlugins();
+   // loadPlugins();
 };
 
 async function showBackupUsage()
@@ -258,29 +258,23 @@ function showUploader() {
     $('#padding').value = '10000';
     padding = '10000';
     files = [];
-    $('#app-form').reset();
-    $('.text_form').style.display = "none";
-    $('.brc20_deploy_form').style.display = "none";
-    $('.brc20_mint_form').style.display = "none";
-    $('.brc20_transfer_form').style.display = "none";
-    $('.file_form').style.display = "block";
-    $('.dns_form').style.display = "none";
-    $('.dns_checker').style.display = "none";
-    $('.unisat_form').style.display = "none";
-    $('.unisat_checker').style.display = "none";
-    $('.unisat').value = "";
-    $('#plugin_form').style.display = 'none';
+    //$('#app-form').reset();
+    //$('.text_form').style.display = "none";
+   // $('.brc20_deploy_form').style.display = "none";
+    //$('.brc20_mint_form').style.display = "none";
+    //$('.brc20_transfer_form').style.display = "none";
+    //$('.file_form').style.display = "block";
+    //$('.dns_form').style.display = "none";
+    //$('.dns_checker').style.display = "none";
+    //$('.unisat_form').style.display = "none";
+    //$('.unisat_checker').style.display = "none";
+    //$('.unisat').value = "";
+    //$('#plugin_form').style.display = 'none';
     $$('.options a').forEach(function(item){
         item.classList.remove('active');
     });
     active_plugin = null;
-    document.getElementById('brc20_mint_nav').classList.remove('active');
-    document.getElementById('brc20_deploy_nav').classList.remove('active');
-    document.getElementById('brc20_transfer_nav').classList.remove('active');
-    document.getElementById('upload_file_nav').classList.add('active');
-    document.getElementById('registration_nav').classList.remove('active');
-    document.getElementById('unisat_nav').classList.remove('active');
-    document.getElementById('text_nav').classList.remove('active');
+
 }
 
 function showBrc20Deploy() {
@@ -452,280 +446,27 @@ async function run(estimate) {
         return;
     }
 
-    if ($('.brc20_deploy_form').style.display != "none") {
+   
 
-        files = [];
+   
 
-        let deploy = '{ \n' +
-            '  "p": "brc-20",\n' +
-            '  "op": "deploy",\n' +
-            '  "tick": "",\n' +
-            '  "max": "",\n' +
-            '  "lim": ""\n' +
-            '}';
-
-        if (isNaN(parseInt($('#brc20-deploy-max').value))) {
-            alert('Invalid supply.');
-            return;
-        }
-
-        if (isNaN(parseInt($('#brc20-deploy-lim').value))) {
-            alert('Invalid limit.');
-            return;
-        }
-
-        if ($('#brc20-deploy-ticker').value == '' || $('#brc20-deploy-ticker').value.length != 4) {
-            alert('Invalid ticker length. Must be 4 characters.');
-            return;
-        }
-
-        deploy = JSON.parse(deploy);
-        deploy.tick = $('#brc20-deploy-ticker').value;
-        deploy.max = $('#brc20-deploy-max').value;
-        deploy.lim = $('#brc20-deploy-lim').value;
-
-        let mimetype = "text/plain;charset=utf-8";
-        files.push({text: JSON.stringify(deploy), name: deploy.tick, hex: textToHex(JSON.stringify(deploy)), mimetype: mimetype, sha256: ''});
-
-        console.log(files);
-    }
-
-    if ($('.brc20_transfer_form').style.display != "none") {
-
-        files = [];
-
-        let transfer = '{ \n' +
-            '  "p": "brc-20",\n' +
-            '  "op": "transfer",\n' +
-            '  "tick": "",\n' +
-            '  "amt": ""\n' +
-            '}';
-
-        if (isNaN(parseInt($('#brc20-transfer-amount').value))) {
-            alert('Invalid transfer amount.');
-            return;
-        }
-
-        if ($('#brc20-transfer-ticker').value == '' || $('#brc20-transfer-ticker').value.length != 4) {
-            alert('Invalid ticker length. Must be 4 characters.');
-            return;
-        }
-
-        transfer = JSON.parse(transfer);
-        transfer.tick = $('#brc20-transfer-ticker').value;
-        transfer.amt = $('#brc20-transfer-amount').value;
-
-        let mimetype = "text/plain;charset=utf-8";
-        files.push({text: JSON.stringify(transfer), name: transfer.tick, hex: textToHex(JSON.stringify(transfer)), mimetype: mimetype, sha256: ''});
-
-        console.log(files);
-    }
-
-    if ($('.brc20_mint_form').style.display != "none") {
-
-        files = [];
-
-        let mint = '{ \n' +
-            '  "p": "brc-20",\n' +
-            '  "op": "mint",\n' +
-            '  "tick": "",\n' +
-            '  "amt": ""\n' +
-            '}';
-
-        if (isNaN(parseInt($('#brc20-mint-amount').value))) {
-            alert('Invalid mint amount.');
-            return;
-        }
-
-        if ($('#brc20-mint-ticker').value == '' || $('#brc20-mint-ticker').value.length != 4) {
-            alert('Invalid ticker length. Must be 4 characters.');
-            return;
-        }
-
-        mint = JSON.parse(mint);
-        mint.tick = $('#brc20-mint-ticker').value;
-        mint.amt = $('#brc20-mint-amount').value;
-
-        let repeat = parseInt($('#brc20-mint-repeat').value);
-
-        if (isNaN(repeat)) {
-            alert('Invalid repeat amount.');
-            return;
-        }
-
-        for (let i = 0; i < repeat; i++) {
-            let mimetype = "text/plain;charset=utf-8";
-            files.push({
-                text: JSON.stringify(mint),
-                name: mint.tick + '_' + i,
-                hex: textToHex(JSON.stringify(mint)),
-                mimetype: mimetype,
-                sha256: ''
-            });
-        }
-
-        console.log(files);
-    }
-
-    if ($('.unisat_form').style.display != "none") {
-
-        files = [];
-
-        let sats_domains = $('.unisat_text').value.split("\n");
-        let sats_domains_cleaned = [];
-
-        for (let sats_domain in sats_domains) {
-
-            let domain = sats_domains[sats_domain].trim();
-
-            if (domain == '' || sats_domains_cleaned.includes(domain)) {
-
-                continue;
-            }
-
-            let splitted = domain.split('.');
-
-            if(splitted.length == 1 || splitted[splitted.length - 1].toLowerCase() != 'unisat')
-            {
-                alert('Invalid unisat domain: ' + domain);
-                return;
-            }
-
-            sats_domains_cleaned.push(domain);
-        }
-
-        for (let sats_domain in sats_domains_cleaned) {
-
-            let mimetype = "text/plain;charset=utf-8";
-            let domain = {"p": "sns", "op": "reg", "name": sats_domains_cleaned[sats_domain].trim()};
-            files.push({
-                text: JSON.stringify(domain),
-                name: sats_domains_cleaned[sats_domain].trim(),
-                hex: textToHex(JSON.stringify(domain)),
-                mimetype: mimetype,
-                sha256: ''
-            });
-            console.log(domain);
-        }
-    }
-
-    if ($('.dns_form').style.display != "none") {
-
-        files = [];
-
-        let sats_domains = $('.dns').value.split("\n");
-        let sats_domains_cleaned = [];
-
-        for (let sats_domain in sats_domains) {
-
-            let domain = sats_domains[sats_domain].trim();
-
-            if (domain == '' || sats_domains_cleaned.includes(domain)) {
-
-                continue;
-            }
-
-            let splitted = domain.split('.');
-
-            if(splitted.length == 1 || splitted[splitted.length - 1].toLowerCase() != 'sats')
-            {
-                alert('Invalid sats domain: ' + domain);
-                return;
-            }
-
-            sats_domains_cleaned.push(domain);
-        }
-
-        for (let sats_domain in sats_domains_cleaned) {
-
-            let mimetype = "text/plain;charset=utf-8";
-            let domain = {"p": "sns", "op": "reg", "name": sats_domains_cleaned[sats_domain].trim()};
-            files.push({
-                text: JSON.stringify(domain),
-                name: sats_domains_cleaned[sats_domain].trim(),
-                hex: textToHex(JSON.stringify(domain)),
-                mimetype: mimetype,
-                sha256: ''
-            });
-            console.log(domain);
-        }
-    }
-
-    if ($('.text_form').style.display != "none") {
-
-        let repeat = parseInt($('#text-repeat').value);
-
-        if (isNaN(repeat)) {
-            alert('Invalid repeat amount.');
-            return;
-        }
-
-        files = [];
-
-        if(!$('#text-multirow').checked)
-        {
-            let text = $$('.text_area')[0];
-            let rows = text.value.split("\n");
-
-            for(let i = 0; i < rows.length; i++)
-            {
-                let value = rows[i].trim();
-
-                if (value != '') {
-                    let mimetype = "text/plain;charset=utf-8";
-                    files.push({
-                        text: JSON.stringify(value),
-                        name: textToHex(value),
-                        hex: textToHex(value),
-                        mimetype: mimetype,
-                        sha256: ''
-                    });
-                }
-            }
-        }
-        else
-        {
-            let texts = $$('.text_area');
-
-            texts.forEach(function (text) {
-
-                if (text.value.trim() != '') {
-                    let mimetype = "text/plain;charset=utf-8";
-                    files.push({
-                        text: JSON.stringify(text.value),
-                        name: textToHex(text.value),
-                        hex: textToHex(text.value),
-                        mimetype: mimetype,
-                        sha256: ''
-                    });
-                }
-            });
-        }
 
         let newFiles = [];
 
-        for (let i = 0; i < repeat; i++) {
+       
 
             for (let j = 0; j < files.length; j++) {
 
                 newFiles.push(files[j]);
             }
-        }
+        
 
         files = newFiles;
 
         console.log(files);
-    }
+    
 
-    if(active_plugin !== null)
-    {
-        let plugin_result = await active_plugin.instance.prepare();
-
-        if(plugin_result === false)
-        {
-            return;
-        }
-    }
+    
 
     if (files.length == 0) {
         alert('Nothing to inscribe. Please upload some files or use one of the additional options.');
@@ -751,12 +492,12 @@ async function run(estimate) {
     let tip_check = parseInt($('#tip').value);
     tip_check = isNaN(tip_check) ? 0 : tip_check;
 
-    /*
+    
     if(!estimate && parseInt(tip_check) > 0 && tip_check < 500)
     {
-        alert('Minimum tipping is 500 sats due to technical reasons. Thank you anyway!');
+        alert('Minimum tipping is 1000 sats so we can include you in the collection automatically');
         return;
-    }*/
+    }
 
     if(active_plugin === null)
     {
@@ -1692,7 +1433,7 @@ function checkAddress() {
         $('.type_of_address').style.borderStyle = "none";
         if(isValidAddress())
         {
-            $('#transfer-balance-link').href = 'https://unisat.io/brc20?q=' + $('.address').value;
+           // $('#transfer-balance-link').href = 'https://unisat.io/brc20?q=' + $('.address').value;
         }
     }
 }
@@ -1878,13 +1619,13 @@ async function checkDomain() {
     }
 }
 
-$('.unisat_checker').onclick = checkUnisatDomain;
-$('.dns_checker').onclick = checkDomain;
+
 $('#bytes_checker').onclick = async function () {
     $('#bytes_checker').innerHTML = 'Please wait...';
 
     let inscribed_already = [];
     let errors = [];
+
 
     for (let i = 0; i < files.length; i++) {
         $('#bytes_checker').innerHTML = 'Please wait...(' + (i + 1) + '/' + files.length + ')';
