@@ -14,13 +14,39 @@
     <script src="js/lib/crypto-utils.1.5.11.js"></script>
     <script src="js/lib/bech32.2.0.0.js"></script>
     <script src="js/lib/qrcode.js"></script>
+    <style>
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(20, 40px);
+            grid-template-rows: repeat(2, 40px);
+            grid-gap: 0;
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        .image-box {
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        .outer-container {
+            width: 100%;
+        }
+    </style>
+
 </head>
 <body>
 
 
 
 <div class="app-wrapper">
-
+    <div class="outer-container">
+        <div class="image-grid" id="container"></div>
+    </div>
     <h1>1x1px</h1>
     <h6 style="margin-top: -15px;">
         Experimental Bitcoin Ordinals based colored coins community inscription tool.
@@ -197,6 +223,30 @@
       document.body.removeChild(downloadLink);
     }
   </script>
+   <script>
+    async function fetchJSON() {
+        const response = await fetch('file.json');
+        const data = await response.json();
+        return data;
+    }
+
+    function createImageGrid(data) {
+        const container = document.getElementById('container');
+        data.slice(0, 40).forEach(item => {
+            const imageBox = document.createElement('a');
+            imageBox.href = `https://ordinals.com/inscription/${item.ordinalid}`;
+            imageBox.target = "_blank";
+            imageBox.classList.add('image-box');
+            imageBox.style.backgroundColor = `rgb(${item.rgb})`;
+
+            container.appendChild(imageBox);
+        });
+    }
+
+    fetchJSON().then(data => {
+        createImageGrid(data);
+    });
+</script>
 
 </body>
 </html>
