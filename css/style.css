@@ -1,42 +1,62 @@
-.container {
+/* CSS code */
+html {
+    font-family: "Open Sans", sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Open Sans", sans-serif;
+  }
+  
+  .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
   }
   
-    
-    .navbar-nav .nav-link:hover {
-      color: rgb(230, 153, 38);
-    }
-    
-    /* Button */
-    .btn-primary {
-      background-color: rgb(230, 153, 38);
-      border-color: rgb(230, 153, 38);
-    }
-    .btn-primary:hover {
-      background-color: #f5871f;
-      border-color: #f5871f;
-    }
+  .navbar-nav .nav-link:hover {
+    color: rgb(230, 153, 38);
+  }
+  
+  /* Button */
+  .btn-primary {
+    background-color: rgb(230, 153, 38);
+    border-color: rgb(230, 153, 38);
+  }
+  .btn-primary:hover {
+    background-color: #f5871f;
+    border-color: #f5871f;
+  }
+  
+
+        
+ .logo-text {
+     font-family: 'Zilla Slab', serif;
+  }
+       
+  .logo-text-bold {
+    font-family: 'Zilla Slab', serif;
+    font-weight:bold;
+ }
+     
   /* Header Styles */
   header {
     position: relative;
   }
   .navbar {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-    }
-    
-    .navbar-brand {
-      font-size: 1.75rem;
-      color: rgb(230, 153, 38);
-    }
-    
-    .navbar-nav .nav-link {
-      font-size: 1rem;
-      margin-left: 1.5rem;
-      color: #fff;
-    }
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .navbar-brand {
+    font-size: 1.75rem;
+    color: rgb(230, 153, 38);
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 1rem;
+    margin-left: 1.5rem;
+    color: #fff;
+  }
   .navbar-toggler {
     color: #fff;
     border-color: #fff;
@@ -45,8 +65,8 @@
     background-image: url(data:image/svg+xml;charset=UTF-8,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20stroke%3D%22rgba(255%2C%20255%2C%20255%2C%200.8)%22%20stroke-linecap%3D%22round%22%20stroke-miterlimit%3D%2210%22%20stroke-width%3D%222%22%20d%3D%22M4%208h24M4%2016h24%22%2F%3E%3C%2Fsvg%3E);
   }
   
-  /* Header Image Styles */
-  .header-image {
+/* Header Image Styles */
+.header-image {
     height: 42vh;
     background-image: url(https://cdn.discordapp.com/attachments/1100631618265305209/1101623933477855333/Bigpepe.btc_wallpaper_render_8k_fine_detail_sharpen_bitcoin_log_a3cd9f46-a814-4b0f-8793-59d701935d8b.png);
     background-repeat: no-repeat;
@@ -109,8 +129,10 @@
   
   /* Footer Styles */
   footer {
-    background-color: rgb(28,30,34);
+    background-color: rgb(28, 30, 34);
     color: #fff;
     padding: 40px 0;
     text-align: center;
   }
+  
+  

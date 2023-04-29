@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <title>OnePixel</title>
@@ -6,15 +5,51 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Bootstrap CSS -->
         <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
-
         <link rel="stylesheet" href="css/style.css">
+
+        <!-- Custom Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;700&display=swap" rel="stylesheet">
+       
         <!-- Bootstrap JavaScript -->
               </head>
   <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">OnePixel</a>
+              <a class="navbar-brand" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="40">
+                  <style>
+                    .blinking-square {
+                      animation: color-shift 5s linear infinite;
+                    }
+                    
+                    @keyframes color-shift {
+                      0% {
+                        fill: rgb(234, 0, 74);
+                      }
+                      25% {
+                        fill: rgb(195, 227, 98);
+                      }
+                      50% {
+                        fill: rgb(255, 188, 63);
+                      }
+                      75% {
+                        fill: rgb(0, 255, 255);
+                      }
+                      100% {
+                        fill: rgb(255, 0, 255);
+                      }
+                    }
+                  </style>
+                  <text class="logo-text-bold" x="0" y="45" font-size="44" fill="rgb(255, 255, 255)">ONE</text>
+                  <text class="logo-text" x="90" y="45" font-size="44" fill="rgb(255, 255, 255)">PiXEL</text>
+                  <rect class="blinking-square" x="119.6" y="16" width="4.5" height="4.5" fill="rgb(255, 0, 15)"></rect>
+          
+
+
+              </a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
